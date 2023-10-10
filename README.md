@@ -9,6 +9,7 @@
 
 - `Testing` - unitest module
 
+_ `pycodestyle` - version 2.8.*
 
 
 # project structure
@@ -27,11 +28,12 @@
 
 ```
 
-`console,py` - this is the entry point of our program (where to use `if __name__=="__main__")
+- `console,py` - this is the entry point of our program (where to use `if __name__=="__main__")
 
-`models/` - contains all classes used for the entire project
+- `models/` - contains all classes used for the entire project
 
-`base_model` - This is the parent class and contains elements common to all other classes:
+
+- `base_model` - This is the parent class and contains elements common to all other classes:
     ## attributes;
         `id`:
         `created_at`:
@@ -40,9 +42,12 @@
         `save()`:
         `to_json()`:
 
-`__init__()` : this is  a magic method that converts our module to a package.
+- `__init__()` : this is  a magic method that converts our module to a package.
 
-`engine/` - contains all storage classes
+- `engine/` - contains all storage classes
+
+
+-`tests/` - Contains all our test files with the `test_` prefix
 
 
 # How to use:
