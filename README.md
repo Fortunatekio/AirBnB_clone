@@ -1,9 +1,13 @@
 # AirBnB_clone
 - This is a miniture version of the Airbnb website that uses the console as the main point interaction with the User(frontend)
-`frontend` - console: cmd module
-`Backend` - python OOP concepts
-`Database` - file storage: JSON module
-`Testing` - unitest module
+
+- `frontend` - console: cmd module
+
+- `Backend` - python OOP concepts
+
+- `Database` - file storage: JSON module
+
+- `Testing` - unitest module
 
 
 
