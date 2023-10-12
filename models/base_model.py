@@ -3,6 +3,7 @@
 from uuid import uuid4
 from datetime import datetime
 import models
+"""added import models"""
 
 class BaseModel:
     """
@@ -41,7 +42,7 @@ class BaseModel:
     def save(self):
         """updates 'update_at' with the current datetime when called"""
         self.updated_at = datetime.now()
-        models.storage.save()
+        models.storage.save()"""calls the savemethod of an object intended to be a storage manager"""
 
 
     def to_dict(self):
@@ -52,8 +53,8 @@ class BaseModel:
         """Returns a dict containing all keys/values"""
         dict_repr = self.__dict__.copy()
         dict_repr["__class__"] = type(self).__module__ + '.' + type(self).__name__
-        dict_repr["created_at"] = self.created_at.strftime("%Y-%m-%d %H:%M:%S.%f")
-        dict_repr["updated_at"] = self.updated_at.strftime("%Y-%m-%d %H:%M:%S.%f")
+        dict_repr["created_at"] = self.created_at.strftime("%Y-%m-%d %H:%M:%S.%f")"""changed from isoformat to strftime and added "%Y-%m-%d %H:%M:%S.%f"""
+        dict_repr["updated_at"] = self.updated_at.strftime("%Y-%m-%d %H:%M:%S.%f")"""same here"""
         return dict_repr
 
 class MyModel(BaseModel):
