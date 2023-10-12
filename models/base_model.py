@@ -54,7 +54,7 @@ class BaseModel:
         dict_repr = self.__dict__.copy()
         dict_repr["__class__"] = type(self).__module__ + '.' + type(self).__name__
         dict_repr["created_at"] = self.created_at.strftime("%Y-%m-%d %H:%M:%S.%f")"""changed from isoformat to strftime and added "%Y-%m-%d %H:%M:%S.%f"""
-        dict_repr["updated_at"] = self.updated_at.strftime("%Y-%m-%d %H:%M:%S.%f")"""same here"""
+        dict_repr["updated_at"] = self.updated_at.strftime("%Y-%m-%d %H:%M:%S.%f")"""same here and changed from dict to dict_repr"""
         return dict_repr
 
 class MyModel(BaseModel):
