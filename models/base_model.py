@@ -2,6 +2,8 @@
 """ this is the 'BaseMode'class"""
 from uuid import uuid4
 from datetime import datetime
+import models
+
 class BaseModel:
     """
     Serves as the base class for all our classes
@@ -15,7 +17,7 @@ class BaseModel:
     def __init__(self, *args, **kwargs):
         self.id = id = str(uuid4())
         self.created_at = datetime.today() 
-        self.update_at = datetime.today()
+        self.updated_at = datetime.today()
         """
          if there are keyword arrguments, check for specific keywords, 
          if found, convert their attributes to datetime objects
@@ -31,27 +33,28 @@ class BaseModel:
         for key, value in kwargs.items():
             setattr(self, key, value)
 
-        def __str__(self):
-            """ Returns the string representation of the class instances """
-            cls = self.__class__.__name__
-            return "[{}] ({}) ({})".format(self.cls, self.created_at, self.__dict__)
+    def __str__(self):
+        """ Returns the string representation of the class instances """
+        cls = self.__class__.__name__
+        return "[{}] ({}) ({})".format(cls, self.created_at, self.__dict__)
 
-        def save(self):
-            """updates 'update_at' with the current datetime when called"""
-            self.update_at = datetime.now()
+    def save(self):
+        """updates 'update_at' with the current datetime when called"""
+        self.updated_at = datetime.now()
+        models.storage.save()
 
 
-        def to_dict(self):
-            """Returns a dict containing all attributes of the object;
-                classname, created_at and updated_at in ISO format
-                TIP: used 'self.__dict__' to return only the set instance attributes
-            """
-            """Returns a dict containing all keys/values"""
-            dict = self.__dict__.copy()
-            dict["__class__"] = self.__class__.__name__
-            dict["created_at"] = dict["created_at"].isoformat()
-            dict["updated_at"] = dict["updated_at"].isoformat()
-            return dict
+    def to_dict(self):
+        """Returns a dict containing all attributes of the object;
+        classname, created_at and updated_at in ISO format
+        TIP: used 'self.__dict__' to return only the set instance attributes
+        """
+        """Returns a dict containing all keys/values"""
+        dict_repr = self.__dict__.copy()
+        dict_repr["__class__"] = type(self).__module__ + '.' + type(self).__name__
+        dict_repr["created_at"] = self.created_at.strftime("%Y-%m-%d %H:%M:%S.%f")
+        dict_repr["updated_at"] = self.updated_at.strftime("%Y-%m-%d %H:%M:%S.%f")
+        return dict_repr
 
 class MyModel(BaseModel):
     def save(self):
