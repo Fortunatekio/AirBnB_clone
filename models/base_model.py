@@ -62,14 +62,3 @@ class BaseModel:
         dict_repr["updated_at"] = self.updated_at.isoformat()
         return dict_repr
 
-class MyModel(BaseModel):
-    def save(self):
-        pass
-kwargs = {
-        "name": "My First Model",
-        "my_number": 89,
-        }
-
-my_model = BaseModel(**kwargs)
-
-print(my_model)
