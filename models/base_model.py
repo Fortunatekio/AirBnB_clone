@@ -1,9 +1,10 @@
 #!/usr/bin/python3
 """ this is the 'BaseMode'class"""
+#from .storage import Storage
 from uuid import uuid4
 from datetime import datetime
-import models
-"""added import models"""
+
+    #storage = Storage()
 
 class BaseModel:
     """
@@ -27,34 +28,38 @@ class BaseModel:
 
         if kwargs:
             if "created_at" in kwargs:
-                kwargs["created_at"] = datetime.strptime(kwargs["created_at"], "%Y-%m-%d %H:%M:%S.%f")
+                kwargs["created_at"] = datetime.fromisoformat(kwargs["created_at"])
             if "updated_at" in kwargs:
-                kwargs["updated_at"] = datetime.strptime(kwargs["updated_at"], "%Y-%m-%d %H:%M:%S.%f")
+                kwargs["updated_at"] = datetime.fromisoformat(kwargs["updated_at"])
 
         for key, value in kwargs.items():
             setattr(self, key, value)
 
     def __str__(self):
         """ Returns the string representation of the class instances """
-        cls = self.__class__.__name__
-        return "[{}] ({}) ({})".format(cls, self.created_at, self.__dict__)
+        #class_name = self.__class__.__name__
+        return ("[{}] ({}) {}".format(self.__class__.__name__, self.id, self.__dict__))
 
-    def save(self):
-        """updates 'update_at' with the current datetime when called"""
-        self.updated_at = datetime.now()
-        models.storage.save()"""calls the savemethod of an object intended to be a storage manager"""
 
+    def save(self) -> None:
+        """updates 'updated_at' with the current datetime when called"""
+        from models import storage
+        self.updated_at = datetime.today()
+        storage.new(self)
+        storage.save()
+
+            #models.storage.save()
 
     def to_dict(self):
         """Returns a dict containing all attributes of the object;
         classname, created_at and updated_at in ISO format
         TIP: used 'self.__dict__' to return only the set instance attributes
+        Returns a dict containing all keys/values
         """
-        """Returns a dict containing all keys/values"""
         dict_repr = self.__dict__.copy()
-        dict_repr["__class__"] = type(self).__module__ + '.' + type(self).__name__
-        dict_repr["created_at"] = self.created_at.strftime("%Y-%m-%d %H:%M:%S.%f")"""changed from isoformat to strftime and added "%Y-%m-%d %H:%M:%S.%f"""
-        dict_repr["updated_at"] = self.updated_at.strftime("%Y-%m-%d %H:%M:%S.%f")"""same here and changed from dict to dict_repr"""
+        #dict_repr["__class__"] = type(self).__module__ + '.' + type(self).__name__
+        dict_repr["created_at"] = self.created_at.isoformat()
+        dict_repr["updated_at"] = self.updated_at.isoformat()
         return dict_repr
 
 class MyModel(BaseModel):
@@ -67,6 +72,4 @@ kwargs = {
 
 my_model = BaseModel(**kwargs)
 
-for key, value in my_model.__dict__.items():
-    print("{}: {}".format(key, value))
 print(my_model)
