@@ -120,6 +120,25 @@ class HBNBCommand(cmd.Cmd):
 
 
 
+    def do_destroy(self,line):
+        """ Deletes intances based on the class name and id and save changes to JSON file"""
+        args = parse(line)
+        if len(line) == 0:
+            print("** class name missing **")
+            return
+        if args[0] not in HBNBCommand.classes:
+            print("** class doesn't exist **")
+            return
+        try:
+            if args[1]:
+                name = "{}.{}".format(args[0], args[1])
+                if name not in storage.all().keys():
+                    print("** no instance found **")
+                else:
+                    del storage.all()[name]
+                    storage.save()
+        except IndexError:
+            print("** instance id missing **")
 
 
 
