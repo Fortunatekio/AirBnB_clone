@@ -15,11 +15,7 @@ class HBNBCommand(cmd.Cmd):
     """custom console"""
     intro = "Our custom console, the HBNB"
     prompt = "(hbnb)"
-<<<<<<< HEAD
-    classes = {"BaseModel"}
-=======
     classes = { "BaseModel", "User", "City", "Place", "Amenity", "State", "Review"}
->>>>>>> main
 
     def do_quit(self, line):
         """exit the console on quit command"""

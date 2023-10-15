@@ -3,7 +3,7 @@
 from models.base_model import BaseModel
 
 
-class review(BaseModel):
+class Review(BaseModel):
     """class that inherits attributes and
     methods of the basemodel class with
     specified public attributes which are
