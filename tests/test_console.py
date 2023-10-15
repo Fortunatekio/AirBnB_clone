@@ -164,5 +164,7 @@ class TestConsole(unittest.TestCase):
             self.typing.onecmd("User.count()")
             self.assertEqual(int, type(ast.literal_eval(ast.parse
                              (fake_output.getvalue(), mode='eval'))))
+
+
 if __name__ == "__main__":
     unittest.main()

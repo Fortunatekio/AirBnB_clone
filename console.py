@@ -9,7 +9,7 @@ class HBNBCommand(cmd.Cmd):
     """custom console"""
     intro = "Our custom console, the HBNB"
     prompt = "(hbnb)"
-    classes = { "BaseModel"}
+    classes = {"BaseModel"}
 
     def do_quit(self, line):
         """exit the console on quit command"""
@@ -22,18 +22,18 @@ class HBNBCommand(cmd.Cmd):
     def emptyline(self):
         """do nothing upon getting a newline"""
         pass
+
     def do_create(self, line):
         """ saves intances of the basemodel in the JSON file and prints it"""
-        if len(line) == 0: # check if a user provide any argument
+        if len(line) == 0:  # check if a user provide any argument
             print("** class name missing **")
-        elif line not in HBNBCommand.classes: # if classname is provided but does not exist in list of classes
+        elif line not in HBNBCommand.classes:
             print("** class doesn't  exist **")
         else:
             # if the classname exist and is provided
-            bsmodel= eval(line)()
-            bsmodel.save() # save to the jsonfile
+            bsmodel = eval(line)()
+            bsmodel.save()  # save to the jsonfile
             print(bsmodel.id)
-
 
     def do_show(self, line):
         """ print the string representation of the name and ID"""
@@ -69,7 +69,6 @@ class HBNBCommand(cmd.Cmd):
             print(obj_list)
         else:
             print("** class doesn't exist **")
-
 
     def do_update(self, arg):
         """Usage: update <class> <id> <attribute_name> <attribute_value> or
@@ -118,10 +117,10 @@ class HBNBCommand(cmd.Cmd):
                     obj.__dict__[k] = v
         storage.save()
 
-
-
-    def do_destroy(self,line):
-        """ Deletes intances based on the class name and id and save changes to JSON file"""
+    def do_destroy(self, line):
+        """ Deletes intances based on the class name and id and
+            save changes to JSON file
+        """
         args = parse(line)
         if len(line) == 0:
             print("** class name missing **")
@@ -141,16 +140,10 @@ class HBNBCommand(cmd.Cmd):
             print("** instance id missing **")
 
 
-
-
-
-
-
-
-
 def parse(line):
     """ help parse user typed input """
     return tuple(line.split())
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()

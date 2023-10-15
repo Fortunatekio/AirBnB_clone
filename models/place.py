@@ -2,10 +2,11 @@
 """class place"""
 from models.base_model import BaseModel
 
+
 class place(BaseModel):
     """class place that inherits the attributes and
     methods of basemodel
-    specified public class attributes are city id ,user id 
+    specified public class attributes are city id ,user id
     name, description
     """
     city_id = ""
