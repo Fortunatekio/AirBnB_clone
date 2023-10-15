@@ -3,7 +3,7 @@
 from models.base_model import BaseModel
 
 
-class place(BaseModel):
+class Place(BaseModel):
     """class place that inherits the attributes and
     methods of basemodel
     specified public class attributes are city id ,user id
