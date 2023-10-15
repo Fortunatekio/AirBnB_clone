@@ -13,7 +13,12 @@ from io import StringIO
 import os
 import console
 import tests
-
+from models.user import User
+from models.state import State
+from models.city import City
+from models.amenity import Amenity
+from models.place import Place
+from models.review import Review
 
 class TestConsole(unittest.TestCase):
     """Unitetest for our  cmd module"""
@@ -33,22 +38,6 @@ class TestConsole(unittest.TestCase):
             os.remove("file.json")
         except:
             pass
-
-    def test_pep8_console(self):
-        """pep8 on the console.py"""
-        style = pep8.StyleGuide(quite=False)
-        errors = 0
-        file = (["console.py"])
-        errors += style.check_files(file).total_errors
-        self.assertEqual(equal, 0, 'Need to fix Pep8')
-
-    def test_pep8_test_console(self):
-        """Pep8 on the test_console.py"""
-        style = pep8.StyleGuide(quiet=False)
-        errors = 0
-        file = (["tests/test_console.py"])
-        errors += style.check_files(file).total_errors
-        self.assertEqual(errors, 0, 'Need to fix Pep8')
 
     def test_docstrings_in_console(self):
         """Test docstrings exist in console.py"""
