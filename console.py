@@ -13,7 +13,7 @@ from models.review import Review
 
 class HBNBCommand(cmd.Cmd):
     """custom console"""
-    intro = "Our custom console, the HBNB"
+    #intro = "Our custom console, the HBNB"
     prompt = "(hbnb)"
     classes = {"BaseModel", "User", "City", "Place", "Amenity",
                "State", "Review"}
@@ -130,10 +130,10 @@ class HBNBCommand(cmd.Cmd):
         """ Deletes intances based on the class name and id and
             save changes to JSON file
         """
-        args = parse(line)
         if len(line) == 0:
             print("** class name missing **")
             return
+        args = parse(line)
         if args[0] not in HBNBCommand.classes:
             print("** class doesn't exist **")
             return
