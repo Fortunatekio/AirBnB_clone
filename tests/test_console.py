@@ -20,6 +20,7 @@ from models.amenity import Amenity
 from models.place import Place
 from models.review import Review
 
+
 class TestConsole(unittest.TestCase):
     """Unitetest for our  cmd module"""
     @classmethod
