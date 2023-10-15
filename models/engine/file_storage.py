@@ -9,13 +9,14 @@ from models.amenity import Amenity
 from models.place import Place
 from models.review import Review
 
+
 class FileStorage:
     """ """
     __file_path = "file.json"
     __objects = {}
-    class_dict = {"BaseModel": BaseModel, "User": User, "State": State,
-            "City": City, "Amenity": Amenity, "Review": Review,
-            "Place": Place}
+    class_dict = {
+            "BaseModel": BaseModel
+            }
 
     def all(self):
         return FileStorage.__objects
@@ -30,7 +31,7 @@ class FileStorage:
             obj_dict[key] = obj.to_dict()
 
         with open(FileStorage.__file_path, "w") as f:
-                json.dump(obj_dict, f)
+            json.dump(obj_dict, f)
 
     def reload(self):
         try:
@@ -46,5 +47,5 @@ class FileStorage:
         except FileNotFoundError:
             pass
 
+
 storage = FileStorage()
-#storage.reload()

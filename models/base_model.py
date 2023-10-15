@@ -1,6 +1,5 @@
 #!/usr/bin/python3
 """ this is the 'BaseMode'class"""
-from storage import Storage
 from uuid import uuid4
 from datetime import datetime
 
@@ -27,9 +26,11 @@ class BaseModel:
 
         if kwargs:
             if "created_at" in kwargs:
-                kwargs["created_at"] = datetime.fromisoformat(kwargs["created_at"])
+                kwargs["created_at"] = datetime
+                fromisoformat(kwargs["created_at"])
             if "updated_at" in kwargs:
-                kwargs["updated_at"] = datetime.fromisoformat(kwargs["updated_at"])
+                kwargs["updated_at"] = datetime
+                fromisoformat(kwargs["updated_at"])
 
         for key, value in kwargs.items():
             setattr(self, key, value)
