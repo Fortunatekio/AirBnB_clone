@@ -1,10 +1,9 @@
 #!/usr/bin/python3
 """ this is the 'BaseMode'class"""
-#from .storage import Storage
+from storage import Storage
 from uuid import uuid4
 from datetime import datetime
 
-    #storage = Storage()
 
 class BaseModel:
     """
@@ -18,10 +17,10 @@ class BaseModel:
     """
     def __init__(self, *args, **kwargs):
         self.id = id = str(uuid4())
-        self.created_at = datetime.today() 
+        self.created_at = datetime.today()
         self.updated_at = datetime.today()
         """
-         if there are keyword arrguments, check for specific keywords, 
+         if there are keyword arrguments, check for specific keywords,
          if found, convert their attributes to datetime objects
 
         """
@@ -37,18 +36,16 @@ class BaseModel:
 
     def __str__(self):
         """ Returns the string representation of the class instances """
-        #class_name = self.__class__.__name__
-        return ("[{}] ({}) {}".format(self.__class__.__name__, self.id, self.__dict__))
-
+        # class_name = self.__class__.__name__
+        return ("[{}] ({}) {}".format(self.__class__.__name__,
+                                      self.id, self.__dict__))
 
     def save(self) -> None:
-        """updates 'updated_at' with the current datetime when called"""
+        """ updates 'updated_at' with the current datetime when called """
         from models import storage
         self.updated_at = datetime.today()
         storage.new(self)
         storage.save()
-
-            #models.storage.save()
 
     def to_dict(self):
         """Returns a dict containing all attributes of the object;
@@ -57,8 +54,6 @@ class BaseModel:
         Returns a dict containing all keys/values
         """
         dict_repr = self.__dict__.copy()
-        #dict_repr["__class__"] = type(self).__module__ + '.' + type(self).__name__
         dict_repr["created_at"] = self.created_at.isoformat()
         dict_repr["updated_at"] = self.updated_at.isoformat()
         return dict_repr
-
