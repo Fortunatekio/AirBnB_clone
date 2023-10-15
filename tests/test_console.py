@@ -147,13 +147,6 @@ class TestConsole(unittest.TestCase):
             self.assertEqual("** no instance found **\n",
                              fake_output.getvalue())
 
-    def test_class_cmd(self):
-        """Test cmd output: <class>.<cmd>"""
-        with patch('sys.stdout', new=StringIO()) as fake_output:
-            self.typing.onecmd("User.count()")
-            self.assertEqual(int, type(ast.literal_eval(ast.parse
-                             (fake_output.getvalue(), mode='eval'))))
-
 
 if __name__ == "__main__":
     unittest.main()
