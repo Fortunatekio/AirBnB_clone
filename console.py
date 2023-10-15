@@ -3,13 +3,19 @@
 import cmd
 from models.base_model import BaseModel
 from models import storage
+from models.user import User
+from models.state import State
+from models.city import City
+from models.amenity import Amenity
+from models.place import Place
+from models.review import Review
 
 
 class HBNBCommand(cmd.Cmd):
     """custom console"""
     intro = "Our custom console, the HBNB"
     prompt = "(hbnb)"
-    classes = { "BaseModel"}
+    classes = { "BaseModel", "User", "City", "Place", "Amenity", "State", "Review"}
 
     def do_quit(self, line):
         """exit the console on quit command"""
