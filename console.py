@@ -15,7 +15,8 @@ class HBNBCommand(cmd.Cmd):
     """custom console"""
     intro = "Our custom console, the HBNB"
     prompt = "(hbnb)"
-    classes = { "BaseModel", "User", "City", "Place", "Amenity", "State", "Review"}
+    classes = {"BaseModel", "User", "City", "Place", "Amenity",
+               "State", "Review"}
 
     def do_quit(self, line):
         """exit the console on quit command"""
@@ -77,9 +78,11 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
 
     def do_update(self, arg):
-        """Usage: update <class> <id> <attribute_name> <attribute_value> or
-        Update a class instance of a given id by adding or updating
-        a given attribute key/value pair or dictionary."""
+        """Usage: update <class> <id> <attribute_name>
+        <attribute_value>
+        Update class instance of a given
+        id by adding or updating
+        a given attribute key/value or dictionary."""
         arg_line = parse(arg)
         objdict = storage.all()
 

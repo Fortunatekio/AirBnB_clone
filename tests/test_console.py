@@ -37,7 +37,7 @@ class TestConsole(unittest.TestCase):
         """
         try:
             os.remove("file.json")
-        except:
+        except IOError:
             pass
 
     def test_docstrings_in_console(self):
