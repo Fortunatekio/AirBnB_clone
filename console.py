@@ -147,10 +147,19 @@ class HBNBCommand(cmd.Cmd):
         except IndexError:
             print("** instance id missing **")
 
+    def do_count(self, line):
+        """Display count of instances specified"""
+        if line in HBNBCommand.classes:
+            count = sum(1 for key in storage.all()
+                        if key.startswith(line + "."))
+            print(count)
+        else:
+            print("** class doesn't exist **")
+
     def default(self, line):
         """class, argument"""
         args = line.split('.')
-        class_args = args[0]
+        class_arg = args[0]
         if len(args) == 1:
             print("*** Unknown syntax: {}".format(line))
             return
@@ -158,9 +167,9 @@ class HBNBCommand(cmd.Cmd):
             args = args[1].split('(')
             command = args[0]
             if command == 'all':
-                HBNBCommand.do_all(self, class_args)
+                HBNBCommand.do_all(self, class_arg)
             elif command == 'count':
-                HBNBCommand.do_count(self, class_args)
+                HBNBCommand.do_count(self, class_arg)
             elif command == 'show':
                 args = args[1].split(')')
                 id_arg = args[0]
