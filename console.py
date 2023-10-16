@@ -178,7 +178,7 @@ class HBNBCommand(cmd.Cmd):
             else:
                 print("*** Unknown syntax: {}".format(line))
         except IndexError:
-                print("*** Unknown syntax: {}".format(line))
+            print("*** Unknown syntax: {}".format(line))
 
 
 def parse(line):
