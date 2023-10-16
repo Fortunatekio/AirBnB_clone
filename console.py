@@ -13,7 +13,6 @@ from models.review import Review
 
 class HBNBCommand(cmd.Cmd):
     """custom console"""
-    #intro = "Our custom console, the HBNB"
     prompt = "(hbnb)"
     classes = {"BaseModel", "User", "City", "Place", "Amenity",
                "State", "Review"}
@@ -109,7 +108,7 @@ class HBNBCommand(cmd.Cmd):
                 return False
 
         if len(arg_line) == 4:
-            obj = objdict["{}.{}".format(arg_line[0], arg_linel[1])]
+            obj = objdict["{}.{}".format(arg_line[0], arg_line[1])]
             if arg_line[2] in obj.__class__.__dict__.keys():
                 valtype = type(obj.__class__.__dict__[arg_line[2]])
                 obj.__dict__[arg_line[2]] = valtype(arg_line[3])
@@ -147,6 +146,39 @@ class HBNBCommand(cmd.Cmd):
                     storage.save()
         except IndexError:
             print("** instance id missing **")
+
+    def default(self, line):
+        """class, argument"""
+        args = line.split('.')
+        class_args = args[0]
+        if len(args) == 1:
+            print("*** Unknown syntax: {}".format(line))
+            return
+        try:
+            args = args[1].split('(')
+            command = args[0]
+            if command == 'all':
+                HBNBCommand.do_all(self, class_arg)
+            elif command == 'count':
+                HBNBCommand.do_count(self, class_arg)
+            elif command == 'show':
+                args = args[1].split(')')
+                id_arg = args[0]
+                id_arg = id_arg.strip("'")
+                id_arg = id_arg.strip('"')
+                arg = class_arg + ' ' + id_arg
+                HBNBCommand.do_show(self, arg)
+            elif command == 'destroy':
+                args = args[1].split(')')
+                id_arg = args[0]
+                id_arg = id_arg.strip('"')
+                id_arg = id_arg.strip("'")
+                arg = class_arg + ' ' + id_arg
+                HBNBCommand.do_destroy(self, arg)
+            else:
+                print("*** Unknown syntax: {}".format(line))
+        except IndexError:
+                print("*** Unknown syntax: {}".format(line))
 
 
 def parse(line):
