@@ -110,7 +110,7 @@ class HBNBCommand(cmd.Cmd):
         if len(arg_line) == 4:
             obj = objdict["{}.{}".format(arg_line[0], arg_line[1])]
             if arg_line[2] in obj.__class__.__dict__.keys():
-                valtype = type(obj.__class__.__dict__[arg_line[2]])
+                valtype = type(obj.__class__.__dict__[arg_linel[2]])
                 obj.__dict__[arg_line[2]] = valtype(arg_line[3])
             else:
                 obj.__dict__[arg_line[2]] = arg_line[3]
